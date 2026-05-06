@@ -73,7 +73,7 @@ L'objectif était d'identifier les vulnérabilités, de déployer une architectu
 
 | Fichier | Description |
 |---------|-------------|
-| `RP-05-ANDREO-Vincent-V2.docx` | Rapport technique complet + Fiche ANNEXE 7-1-A |
+| `RP-01-ANDREO-Vincent.docx` | Rapport technique complet + Fiche ANNEXE 7-1-A |
 | `TESTS-RESULTATS.md` | Rapport de tests détaillé (stack sécurité, Lynis, pentest) |
 
 ---
