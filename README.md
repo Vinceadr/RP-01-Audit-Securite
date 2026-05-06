@@ -41,6 +41,7 @@ L'objectif était d'identifier les vulnérabilités, de déployer une architectu
 - Configuration SSH : port non standard, désactivation root, authentification par clé uniquement
 - Déploiement **Suricata** (IDS/IPS multi-thread) avec règles ET/Open
 - Déploiement **CrowdSec** avec collections : `crowdsecurity/linux`, `crowdsecurity/sshd`, `crowdsecurity/nginx`
+- CrowdSec CAPI actif (16 077 IPs blacklistées) — bouncer local en cours de configuration (clé LAPI)
 - Déploiement **WireGuard** (wg-easy) — VPN managé via interface web (port 51820/UDP, UI 51821/TCP)
 - Score **Lynis : 79/100** (vs 58/100 avant durcissement)
 - Gestion des exceptions documentées : `ip_forward` (requis par KVM), faux positifs CVE
@@ -64,7 +65,7 @@ L'objectif était d'identifier les vulnérabilités, de déployer une architectu
 | Tests d'intrusion réussis | N/A | **0/12**
 | WireGuard VPN | Non déployé | **✅ Actif** (healthy) |
 | Services avec auth par clé | 0% | **100%** |
-| IPs bannies CrowdSec (CAPI) | 0 | **16 077** |
+| IPs CAPI CrowdSec (blacklist globale) | 0 | **16 077** (bouncer LAPI en config) |
 
 ---
 
@@ -72,9 +73,8 @@ L'objectif était d'identifier les vulnérabilités, de déployer une architectu
 
 | Fichier | Description |
 |---------|-------------|
-| `RP-01-ANDREO-Vincent.docx` | Rapport technique complet (4 phases, scripts, captures) |
-| `Fiche-RP01-ANDREO-Vincent.docx` | Fiche officielle ANNEXE 7-1-A (formulaire BTS) |
-| `Présentation-5min-RP01-ANDREO-Vincent.docx` | Texte de présentation orale 5 minutes |
+| `RP-05-ANDREO-Vincent-V2.docx` | Rapport technique complet + Fiche ANNEXE 7-1-A |
+| `TESTS-RESULTATS.md` | Rapport de tests détaillé (stack sécurité, Lynis, pentest) |
 
 ---
 
@@ -87,8 +87,8 @@ nft list ruleset
 # Lancer un audit Lynis complet
 lynis audit system --quick
 
-# Scanner l'infrastructure avec Nmap
-nmap -sS -sV -O -A --script vuln 192.168.40.0/24
+# Découverte réseau complète (noter : -A inclut déjà -sV, -O, scripts NSE)
+nmap -A --script vuln 192.168.40.0/24
 
 # Vérifier le statut CrowdSec
 cscli metrics

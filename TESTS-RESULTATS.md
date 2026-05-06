@@ -11,6 +11,12 @@
 - **Acces** : Console WebVirt + SSH via jump host
 - **Playbook Ansible** : `Vince_monitoring_ansible-main` - role `security`
 
+> **Note :** Ce fichier documente les tests realisés sur la **VM de test WebVirt** (environnement isole, Debian 12 brute importee).
+> Le README principal reference les scores du **serveur de production IRIS Nice** (Lynis 58→79/100).
+> Les deux mesures sont reelles et correspondent à des environnements distincts :
+> - VM test (ce fichier) : baseline 64/100 → final 69/100
+> - Serveur prod (README) : baseline 58/100 → final 79/100
+
 ---
 
 ## Resultats des tests (17/04/2026)
@@ -103,6 +109,8 @@ Malware scanner : [V] (rkhunter)
 | +sysctl rp_filter | 68/100 | net.ipv4.conf.all.rp_filter=1 |
 | +banniere, process acct | 69/100 | /etc/issue.net, acct |
 
+*Environnement : VM WebVirt Debian 12 brute (reseau NAT libvirt) — ≠ serveur de production*
+
 ---
 
 ## Ports reseau exposes
@@ -126,6 +134,7 @@ Toutes les technologies du role Ansible security sont actives et fonctionnelles.
 WireGuard VPN deploye et operationnel (wg-easy, healthy).
 CrowdSec bouncer non active (necessite cle API LAPI) - fonctionnalite supplementaire non requise pour la demo.
 
-Score final Lynis : 69/100 (+27 points vs etat initial)
+Score final Lynis (VM test) : 69/100 (+5 points vs baseline VM 64/100)
+Score final Lynis (serveur prod — voir README) : 79/100 (+21 points vs baseline prod 58/100)
 IPs bloquees par CrowdSec : 16 077
 Intrusions abouties : 0
