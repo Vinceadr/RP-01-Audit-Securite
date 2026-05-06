@@ -7,9 +7,9 @@
 
 ## Contexte et objectifs
 
-Dans le cadre du BTS SIO option SISR, cette réalisation professionnelle porte sur l'**audit complet de la sécurité d'une infrastructure réseau virtualisée** hébergée sur un hyperviseur KVM/QEMU sous Debian 12.
+Dans le cadre du BTS SIO option SISR (Épreuve E5), cette réalisation professionnelle porte sur l'’’audit complet de la sécurité d’une infrastructure réseau virtualisée’’ hébergée sur un hyperviseur KVM/QEMU sous Debian 12.
 
-L'objectif était d'identifier les vulnérabilités, de déployer une architecture sécurisée (DMZ + pare-feu nftables), de durcir les hôtes, puis de valider l'ensemble par des tests d'intrusion.
+L'objectif était d'identifier les vulnérabilités, de déployer une architecture sécurisée (DMZ + pare-feu nftables), de durcir les hôtes, puis de valider l'ensemble par des tests d'intrusion. Cette RP inclut également la **conception** de la migration AD → OpenLDAP Linux (802.1X RADIUS sur switches Cisco Catalyst 2960-S + AP C9105AXI-E).
 
 ---
 
@@ -42,7 +42,7 @@ L'objectif était d'identifier les vulnérabilités, de déployer une architectu
 - Déploiement **Suricata** (IDS/IPS multi-thread) avec règles ET/Open
 - Déploiement **CrowdSec** avec collections : `crowdsecurity/linux`, `crowdsecurity/sshd`, `crowdsecurity/nginx`
 - Déploiement **WireGuard** (wg-easy) — VPN managé via interface web (port 51820/UDP, UI 51821/TCP)
-- Score **Lynis : 69/100** (vs 42/100 avant durcissement)
+- Score **Lynis : 79/100** (vs 58/100 avant durcissement)
 - Gestion des exceptions documentées : `ip_forward` (requis par KVM), faux positifs CVE
 
 ### Phase 4 — Tests d'intrusion (Semaine 4)
@@ -58,7 +58,7 @@ L'objectif était d'identifier les vulnérabilités, de déployer une architectu
 
 | Indicateur | Avant | Après |
 |------------|-------|-------|
-| Score Lynis | 42/100 | **69/100** |
+| Score Lynis | 58/100 | **79/100** |
 | CVE critiques ouvertes | 8 | **0** |
 | Ports exposés inutilement | 17 | **1** (container école) |
 | Tests d'intrusion réussis | N/A | **0/12**
@@ -100,13 +100,14 @@ tail -f /var/log/suricata/fast.log
 
 ---
 
-## Compétences validées
+## Compétences validées (Bloc B2 + B3 — E5 SISR)
 
-- **A1.1** — Analyse du besoin et définition du périmètre de sécurité
-- **A1.2** — Mise en place d'une architecture sécurisée (pare-feu, DMZ)
-- **A3.1** — Administration et sécurisation des équipements réseau
-- **A3.3** — Mise en œuvre de solutions de détection d'intrusion
-- **A5.1** — Participation aux tests de sécurité (pentest)
+- **B2.1** — Concevoir une solution d'infrastructure réseau (migration AD → OpenLDAP, 802.1X, refonte DMZ)
+- **B2.2** — Installer, tester et déployer (nftables, Suricata, CrowdSec, WireGuard, Debian 12)
+- **B2.3** — Exploiter, dépanner et superviser (Lynis 58→79/100, monitoring, correction CVE)
+- **B3.1** — Protéger les données à caractère personnel (RGPD, politique de sécurité)
+- **B3.2** — Préserver l'identité numérique (authentification SSH, VPN WireGuard)
+- **B3.3** — Sécuriser les équipements et les usages (CIS Benchmark, pentest 12/12 PASS)
 
 ---
 
@@ -120,6 +121,6 @@ tail -f /var/log/suricata/fast.log
 
 ---
 
-*Réalisation professionnelle validée dans le cadre de l'examen E5/E6 BTS SIO.*
+*Réalisation professionnelle — Épreuve E5 BTS SIO SISR.*
 
 
